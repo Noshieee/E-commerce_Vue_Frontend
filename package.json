@@ -18,6 +18,7 @@
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",
+    "webpack": "^4.39.3",
     "yup": "^0.32.11"
   },
   "devDependencies": {
