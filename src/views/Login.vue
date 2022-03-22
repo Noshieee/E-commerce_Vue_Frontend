@@ -17,7 +17,7 @@
     <button type="submit" class="form-btn neu-border">Sign in</button>
 
     <p>
-      Not a member?
+      Don't have an account?
       <router-link :to="{ name: 'Register' }">Create an account</router-link>
     </p>
   </form>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     login() {
-      fetch("https://pos-backend-proj.herokuapp.com/users", {
+      fetch("https://enosh-e-commerce-final-project.herokuapp.com/users", {
         method: "POST",
         body: JSON.stringify({
           email: this.email,
@@ -46,7 +46,7 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           localStorage.setItem("jwt", json.jwt);
-          alert("User logged in");
+          alert(`You have been logged in`);
           this.$router.push({ name: "Products" });
         })
         .catch((err) => {
@@ -58,10 +58,6 @@ export default {
 </script>
 
 <style>
-body {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.pexels.com/photos/5709615/pexels-photo-5709615.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-}
 .neu-border {
   border-radius: 30px;
 
@@ -80,8 +76,8 @@ body {
   width: 100%;
   margin-inline: auto;
   max-width: 600px;
-  margin-top: 200px;
-  background-color: rgb(0, 195, 255);
+  margin-top: 70px;
+  background-color: rgb(225, 0, 255);
 }
 
 .form-heading {
@@ -113,5 +109,9 @@ body {
 .form-social-btn {
   width: 45%;
   color: #333;
+}
+
+.router-link{
+  color:   rgb(225, 0, 255);
 }
 </style>

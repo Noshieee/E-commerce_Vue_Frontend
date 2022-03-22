@@ -24,7 +24,7 @@ export default {
   methods: {
     login() {
       console.log(this.email, this.password);
-      fetch("http://localhost:2000/users", {
+      fetch("https://enosh-e-commerce-final-project.herokuapp.com/users", {
       method: "PATCH", 
       body: JSON.stringify({
         email: this.email, 
@@ -64,7 +64,7 @@ main {
 }
 
 h1{
-  color: rgb(0, 195, 255);
+  color: rgb(225, 0, 255);
   /* font-size: 100px; */
 }
 
@@ -80,7 +80,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: rgb(0, 195, 255);
+  color: rgb(225, 0, 255);
   text-decoration: none;
 }
 button {
@@ -91,6 +91,7 @@ p {
   font-size: 40px;
   color: white;
 }
+
 
 </style>
 
