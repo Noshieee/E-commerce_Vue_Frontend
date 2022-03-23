@@ -26,7 +26,7 @@
       v-model="password"
       placeholder="Password"
     />
-    <span style="color:black"><button type="submit" class="form-btn neu-border">Sign up</button></span>
+    <button type="submit" class="form-btn btn-light neu-border">Sign up</button>
 
 
     <p>
@@ -48,7 +48,8 @@ export default {
   },
   methods: {
     register() {
-      fetch("https://pos-backend-proj.herokuapp.com/users", {
+      console.log(this.name, this.email, this.contact, this.password)
+      fetch("https://enosh-e-commerce-final-project.herokuapp.com/users", {
         method: "POST",
         body: JSON.stringify({
           name: this.name,
@@ -75,13 +76,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .neu-border {
-  border-radius: 10px;
-  background-color: transparent;
+  border-radius: 30px;
+  /* background-color: transparent; */
 }
 .neu-border-inset {
-  border-radius: 10px;
+  border-radius: 30px;
   background: #f5f5f5;
 }
 
@@ -90,11 +91,13 @@ export default {
   flex-direction: column;
   justify-content: center;
   padding: 40px;
-  gap: 40px;
+  gap: 20px;
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  background-color: rgb(0, 195, 255);
+  margin-top: 70px;
+  background-color: rgb(225, 0, 255);
+  margin-bottom: 70px;
 }
 
 .form-heading {

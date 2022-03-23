@@ -14,7 +14,7 @@
       v-model="password"
       placeholder="Password"
     />
-    <button type="submit" class="form-btn neu-border">Sign in</button>
+    <button type="submit" class="form-btn btn-light neu-border">Sign in</button>
 
     <p>
       Don't have an account?
@@ -33,8 +33,9 @@ export default {
   },
   methods: {
     login() {
+      console.log(this.email, this.password);
       fetch("https://enosh-e-commerce-final-project.herokuapp.com/users", {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify({
           email: this.email,
           password: this.password,
@@ -57,14 +58,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .neu-border {
   border-radius: 30px;
 
 }
 .neu-border-inset {
   border-radius: 30px;
-
+  background: white;
 }
 
 .form {
@@ -90,6 +91,7 @@ export default {
   border: none;
   outline: none;
   padding: 20px;
+  color: black;
 }
 
 .form-btn {
@@ -109,6 +111,12 @@ export default {
 .form-social-btn {
   width: 45%;
   color: #333;
+}
+
+.form-btn neu-border {
+  border-radius: 10px;
+  background: #f5f5f5;
+  box-shadow: inset 8px 8px 15px #e4e4e4, inset -8px -8px 15px #ffffff;
 }
 
 .router-link{
