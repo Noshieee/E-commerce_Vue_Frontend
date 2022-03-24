@@ -18,7 +18,7 @@ export default {
 
 body {
   background: black;
-  box-shadow: 4px 4px 10px #e4e4e4, -4px -4px 10px #ffffff;
+  box-shadow: 3px 3px 10px #e4e4e4, -3px -3px 10px #ffffff;
 }
 
 .container {

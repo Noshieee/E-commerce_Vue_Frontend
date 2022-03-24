@@ -5,7 +5,7 @@
     <router-link @click="toggleNav" :to="{ name: 'Register' }">Register</router-link>
     <router-link @click="toggleNav" :to="{ name: 'Products' }">Products</router-link>
     <router-link @click="toggleNav" :to="{ name: 'CreateProduct' }">Create Product</router-link>
-    <router-link @click="toggleNav" :to="{ name: 'Cart' }">Cart<span id="badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></router-link>
+    <router-link @click="toggleNav" :to="{ name: 'Cart' }">Cart <span id="badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></router-link>
     <router-link @click="toggleNav" :to="{ name: 'Profile' }">Profile</router-link>
     <router-link @click="logout" class="logout" :to="{ name: 'Home' }">Log out</router-link>
   </nav>

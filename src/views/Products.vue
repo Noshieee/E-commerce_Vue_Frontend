@@ -41,30 +41,30 @@
     </div>
     
           <div class="row">
-          <div class="card col-sm-3" v-for="product in products" :key="product.id">
-            <div v-if="products" >
-        <img :src="product.img" class="card-img-top" alt="${product.title}">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
-          <h5 class="card-category">{{ product.category }}</h5>
-          <p class="card-text">R{{ product.price }}</p>
-        </div>
-          <div class="d-flex mb-3">
-            <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
-            <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="bi bi-bag-plus"></i></button>
-          </div>
-        </div>
-                  <div class="d-flex justify-content-end card-footer">
-            <button type="button" class="btn btn-primary w-50 ms-4" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-              Edit
-            </button>
-            <button type="button" class="btn btn-danger w-50 ms-4" onclick="deleteProduct(${position})" >
-              Delete
-            </button>
-          </div>
-          </div>
+            <div class="card col-sm-3 col-3" v-for="product in products" :key="product.id">
+              <div v-if="products" >
+                <img :src="product.img" class="card-img-top" alt="${product.title}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.title }}</h5>
+                  <h5 class="card-category">{{ product.category }}</h5>
+                  <p class="card-text">R{{ product.price }}</p>
+                </div>
+                  <div class="d-flex mb-3">
+                    <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
+                    <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="bi bi-bag-plus"></i></button>
+                  </div>
+              </div>
+                    <!-- <div class="d-flex justify-content-end card-footer">
+              <button type="button" class="btn btn-primary w-50 ms-4" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
+                Edit
+              </button>
+              <button type="button" class="btn btn-danger w-50 ms-4" onclick="deleteProduct(${position})" >
+                Delete
+              </button>
+            </div> -->
+            </div>
           
-                    </div>
+         </div>
 
 
 </template>
@@ -77,7 +77,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch("https://pos-backend-proj.herokuapp.com/products", {
+      fetch("https://enosh-e-commerce-final-project.herokuapp.com/products", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
