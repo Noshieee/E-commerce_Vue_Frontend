@@ -1,11 +1,11 @@
 <template>
 
 <section>
-  <div class="hello">
+  <div class="Intro">
     <h1 class="display-1">Kicking n Screaming</h1>
   </div>
   <p>
-    We are an e-commerce business selling a variety of soccer-related products
+    All your Football needs, wants, and more...
   </p>
 
 <router-link :to="{ name: 'Login' }"><button type="button" class="btn btn-primary btn-lg">Log in</button></router-link>
@@ -47,7 +47,7 @@ export default {
 
 section{
     height: 100vh;
-    background-image: url('https://i.postimg.cc/SR0xJncx/pexels-jonathan-petersson-399187.jpg');
+    background-image: url('https://i.postimg.cc/0jkgz8rn/1952506.jpg  ');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -56,7 +56,7 @@ main {
   padding: 0 !important;
 }
 
-.hello{
+.Intro{
   padding-top: 200px;
   margin-top: auto;
   margin-bottom: auto;

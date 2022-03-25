@@ -9,9 +9,10 @@
         <label for="" class="form-label">Sort by category</label>
         <select
           class="form-select"
+          v-model="selected"
           name=""
           id="sortCategory"
-          onchange="sortCategory()"
+          @change="sortCategory()"
         >
           <option value="All">All</option>
           <option value="Footwear">Footwear</option>
@@ -21,7 +22,7 @@
       </div>
       <div class="d-flex w-25 ms-3">
         <label for="" class="form-label">Sort name</label>
-        <select class="form-select" name="" id="sortName" onchange="sortName()">
+        <select class="form-select" name="" id="sortName" @change="sortName()">
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
         </select>
@@ -32,7 +33,7 @@
           class="form-select"
           name=""
           id="sortPrice"
-          onchange="sortPrice()"
+          @change="sortPrice()"
         >
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
@@ -49,21 +50,12 @@
                   <h5 class="card-category">{{ product.category }}</h5>
                   <p class="card-text">R{{ product.price }}</p>
                 </div>
-                  <div class="d-flex mb-3">
+                  <!-- <div class="d-flex mb-3">
                     <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
-                    <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="bi bi-bag-plus"></i></button>
-                  </div>
+                    <button type="button" class="btn btn-secondary ms-3" onclick="addToCart({{position}})"><i class="bi bi-bag-plus"></i></button>
+                  </div> -->
               </div>
-                    <!-- <div class="d-flex justify-content-end card-footer">
-              <button type="button" class="btn btn-primary w-50 ms-4" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-                Edit
-              </button>
-              <button type="button" class="btn btn-danger w-50 ms-4" onclick="deleteProduct(${position})" >
-                Delete
-              </button>
-            </div> -->
-            </div>
-          
+            </div>      
          </div>
 
 
@@ -75,46 +67,75 @@ export default {
       products: null,
     };
   },
-  mounted() {
-    if (localStorage.getItem("jwt")) {
-      fetch("https://enosh-e-commerce-final-project.herokuapp.com/products", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          this.products = json;
-          this.products.forEach(async (product) => {
-            await fetch(
-              "https://pos-backend-proj.herokuapp.com/users" + product.title,
-              {
-                method: "GET",
-                headers: {
-                  "Content-type": "application/json; charset=UTF-8",
-                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-                },
-              }
-            )
-              .then((response) => response.json())
-              .then((json) => {
-                product.title = json.name;
-              });
-          });
+      methods: {
+      sortName() {
+      let direction = document.querySelector("#sortName").value;
+    
+      let sortedProducts = products.sort((a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return -1;
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
+      if (direction == "descending") sortedProducts.reverse();
+      console.log(sortedProducts);
+      readProducts(products);
+    },
+      sortPrice() {
+      let direction = document.querySelector("#sortPrice").value;
+    
+      let sortedProducts = products.sort((a, b) => a.price - b.price);
+    
+      console.log(sortedProducts);
+    
+      if (direction == "descending") sortedProducts.reverse();
+      readProducts(sortedProducts);
+    },
+      },
+    mounted() {
+      if (localStorage.getItem("jwt")) {
+        fetch("https://enosh-e-commerce-final-project.herokuapp.com/products", {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
         })
-        .catch((err) => {
-          alert("User not logged in");
-        });
-    } else {
-      alert("User not logged in");
-      this.$router.push({ name: "Login" });
-    }
-  },
-};
+          .then((response) => response.json())
+          .then((json) => {
+            this.products = json;
+            this.products.forEach(async (product) => {
+              await fetch(
+                "https://enosh-e-commerce-final-project.herokuapp.com/users" + product.title,
+                {
+                  method: "GET",
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                  },
+                }
+              )
+                .then((response) => response.json())
+                .then((json) => {
+                  product.title = json.name;
+                });
+            });
+          })
+          .catch((err) => {
+            alert("User not logged in");
+          });
+      } else {
+        alert("User not logged in");
+        this.$router.push({ name: "Login" });
+      }
+    },
+}
 </script>
-<style>
+
+<style scoped>
 
 
 

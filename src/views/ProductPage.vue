@@ -5,11 +5,11 @@
   
   <div v-else>Loading the product...</div>
         <div class="card">
-        <img src="${product.img}" class="card-img-top" alt="${product.title}">
+        <img src="product.img" class="card-img-top" alt="${product.title}">
         <div class="card-body">
-          <h5 class="card-title">${product.title}</h5>
-          <h5 class="card-category">${product.category}</h5>
-          <p class="card-text">R${product.price}</p>
+            <h5 class="card-title">{{product.title}}</h5>
+            <h5 class="card-category">{{product.category}}</h5>
+            <p class="card-text">R{{product.price}}</p>
           <div class="d-flex mb-3">
             <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
             <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="bi bi-bag-plus"></i></button>
@@ -25,8 +25,36 @@ export default {
       product: null,
     };
   },
+  methods: {
+        showCartBadge() {
+      document.querySelector("#badge").innerHTML = cart ? cart.length : "";
+    },
+     addToCart(position) {
+      let qty = document.querySelector(`#addToCart${position}`).value;
+      let added = false;
+      cart.forEach((product) => {
+        if (product.title == products[position].title) {
+          alert(
+            `You have successfully added ${qty} ${products[position].title} to the cart`
+          );
+          product.qty = parseInt(product.qty) + parseInt(qty);
+          added = true;
+        }
+      });
+      if (!added) {
+        cart.push({ ...products[position], qty });
+        alert(
+          `You have successfully added ${qty} ${products[position].title} to the cart`
+        );
+      }
+    
+      showCartBadge();
+    
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  },
   mounted() {
-    fetch("https://pos-backend-proj.herokuapp.com/products" + this.id, {
+    fetch("https://enosh-e-commerce-final-project.herokuapp.com/products" + this.id, {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -37,7 +65,7 @@ export default {
       .then(async (json) => {
         this.product = json;
         await fetch(
-          "https://pos-backend-proj.herokuapp.com/users" + json.title,
+          "https://enosh-e-commerce-final-project.herokuapp.com/users" + json.title,
           {
             method: "GET",
             headers: {
